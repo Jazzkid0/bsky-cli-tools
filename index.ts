@@ -13,22 +13,38 @@ await agent.login({
   password: process.env.BSKY_PASSWORD!,
 });
 
-const bleet = 'You can find the code for this bleet >>>here<<<, with a link card, a title and a description!';
-await agent.post({
-  text: bleet,
-  entities: [
-    {
-      index: { start: bleet.indexOf('>>>') + 3, end: bleet.indexOf('<<<') },
-      type: 'link',
-      value: 'https://github.com/aliceisjustplaying/atproto-starter-kit',
-    },
-  ],
-  embed: {
-    $type: 'app.bsky.embed.external',
-    external: {
-      uri: 'https://github.com/aliceisjustplaying/atproto-starter-kit',
-      title: "alice's atproto starter kit",
-      description: "i'm just playing around with the api",
-    },
-  },
-});
+const thread = await agent.getPostThread({uri: 'at://bsky.social/jazzkid.bsky.social/post#/$3jtd5g5uuhr2o'});
+
+console.log(thread);
+
+// const fryes = 'https://staging.bsky.app/profile/jazzkid.bsky.social/post/3jtcy54ing22v';
+
+// const bleet = 'Me, flexing: Google';
+// await agent.post({
+//   text: bleet,
+//   entities: [
+//     {
+//       index: { start: 13, end: 19 },
+//       type: 'link',
+//       value: 'https://www.google.com',
+//     },
+//   ],
+//   reply: {
+//     root: {
+//       uri: 'https://staging.bsky.app/profile/jazzkid.bsky.social/',
+//       cid: '3jtcy54ing22v',
+//     },
+//     parent: {
+//       uri: 'https://staging.bsky.app/profile/jazzkid.bsky.social/',
+//       cid: '3jtcy54ing22v',
+//     },
+//   },
+//   embed: {
+//     $type: 'app.bsky.embed.external',
+//     external: {
+//       uri: 'https://www.google.com',
+//       title: "Google",
+//       description: "Google, but with whatever description I want >:)",
+//     },
+//   },
+// });
