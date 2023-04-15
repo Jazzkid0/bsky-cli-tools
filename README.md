@@ -3,7 +3,7 @@
 This is a rough collection of tools for interacting with the Bluesky API from the command line. It's not at all polished.
 
 I'm using this repo to learn, and you can too!
-Fork at your leisure, and feel free to ask me about it on Bluesky @jazzkid.bsky.social
+Use it as a template or fork at your leisure, and feel free to ask me about it on Bluesky: @jazzkid.bsky.social
 
 ---
 
