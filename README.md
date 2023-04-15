@@ -1,9 +1,12 @@
-# atproto starter kit
+# atproto CLI stuff
 
-Use this as a template repo. Requires Node 18+ with typescript and ts-node installed globally (`npm i -g typescript ts-node`). Add your bluesky username and password to `.env` then run your app with `npm run start` or `ts-node-esm index.ts`.
+This is a rough collection of tools for interacting with the Bluesky API from the command line. It's not at all polished.
 
-I recommend using `eslint` (for linting) and `prettier` (for enforcing code style) in your chosen text editor (or from the command line).
+I'm using this repo to learn, and you can too!
+Fork at your leisure, and feel free to ask me about it on Bluesky @jazzkid.bsky.social
 
-API documentation can be found here: [https://github.com/bluesky-social/atproto/tree/main/packages/api](https://github.com/bluesky-social/atproto/tree/main/packages/api)
+---
 
-@ me on bluesky (@aliceisjustplaying.bsky.social, did:plc:by3jhwdqgbtrcc7q4tkkv3cf) if you've built something interesting with it!
+Bluesky API documentation can be found here: [https://github.com/bluesky-social/atproto/tree/main/packages/api](https://github.com/bluesky-social/atproto/tree/main/packages/api)
+
+This is built from code provided by Alice! She's on bluesky too: @aliceisjustplaying.bsky.social
