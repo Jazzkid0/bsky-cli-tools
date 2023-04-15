@@ -1,4 +1,4 @@
-# atproto CLI stuff
+# Bluesky CLI stuff
 
 This is a rough collection of tools for interacting with the Bluesky API from the command line. It's not at all polished.
 
