@@ -1,3 +1,5 @@
+// This is the basic structure for retrieving posts from a user's feed. It just gets my latest post, and prints the text content to the console.
+
 import bsky from '@atproto/api';
 const { BskyAgent } = bsky;
 import * as dotenv from 'dotenv';
@@ -13,38 +15,11 @@ await agent.login({
   password: process.env.BSKY_PASSWORD!,
 });
 
-const thread = await agent.getPostThread({uri: 'at://bsky.social/jazzkid.bsky.social/post#/$3jtd5g5uuhr2o'});
+const posts = await agent.getAuthorFeed({actor: 'jazzkid.bsky.social'})
+const last = (posts.data.feed[0].post)
 
-console.log(thread);
+console.log(last)
 
-// const fryes = 'https://staging.bsky.app/profile/jazzkid.bsky.social/post/3jtcy54ing22v';
+console.log(JSON.parse(JSON.stringify(last.record)).text)
 
-// const bleet = 'Me, flexing: Google';
-// await agent.post({
-//   text: bleet,
-//   entities: [
-//     {
-//       index: { start: 13, end: 19 },
-//       type: 'link',
-//       value: 'https://www.google.com',
-//     },
-//   ],
-//   reply: {
-//     root: {
-//       uri: 'https://staging.bsky.app/profile/jazzkid.bsky.social/',
-//       cid: '3jtcy54ing22v',
-//     },
-//     parent: {
-//       uri: 'https://staging.bsky.app/profile/jazzkid.bsky.social/',
-//       cid: '3jtcy54ing22v',
-//     },
-//   },
-//   embed: {
-//     $type: 'app.bsky.embed.external',
-//     external: {
-//       uri: 'https://www.google.com',
-//       title: "Google",
-//       description: "Google, but with whatever description I want >:)",
-//     },
-//   },
-// });
+
