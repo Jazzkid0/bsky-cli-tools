@@ -2,51 +2,10 @@
 // Usage: ts-node-esm reply.ts --reply-to "<link to post>" --text-content "<text content of reply>"
 
 import readline from 'readline'
-import bsky from '@atproto/api';
-const { BskyAgent } = bsky;
-import * as dotenv from 'dotenv';
-import process from 'node:process';
-dotenv.config();
+import agent from './agent.js';
+import { getParentPost } from './getParentPost.js';
+import { createReplyRecord } from './createReplyRecord.js';
 
-const agent = new BskyAgent({
-  service: 'https://bsky.social',
-});
-
-await agent.login({
-  identifier: process.env.BSKY_USERNAME!,
-  password: process.env.BSKY_PASSWORD!,
-});
-
-const getParentPost = async (parentURL: string) => {
-
-  const parentDomain = parentURL.split("/")[4]
-  const parentPostID = parentURL.split("/")[6]
-
-  const parentFeed = await agent.getAuthorFeed({actor: parentDomain})
-  const parentPost = parentFeed.data.feed.find(post => post.post.uri.split("/")[4] === parentPostID)
-
-  if (parentPost) {
-    return parentPost
-  } else {
-    return undefined
-  }
-}
-
-const postReply = async (agent, textcontent: string, parentRootURI: string, parentRootCID: string, parentURI: string, parentCID: string) => {
-  await agent.post({
-    text: textcontent,
-    reply: {
-      root: {
-        uri: parentRootURI,
-        cid: parentRootCID,
-      },
-      parent: {
-        uri: parentURI,
-        cid: parentCID,
-      },
-    },
-  })
-}
 
 // Very inefficient way to find the post, but it works with just the URL. I'm sure there's a better way to do this.
 export const reply = async (agent, textcontent: string, parentURL: string) => {
@@ -69,7 +28,7 @@ export const reply = async (agent, textcontent: string, parentURL: string) => {
     parentRootCID = parentData.root.cid;
   }
 
-  await postReply(agent, textcontent, parentRootURI, parentRootCID, parentURI, parentCID)
+  await createReplyRecord(agent, textcontent, parentRootURI, parentRootCID, parentURI, parentCID)
 }
 
 

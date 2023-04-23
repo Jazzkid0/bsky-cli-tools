@@ -2,26 +2,13 @@
 // Usage: ts-node-esm bleet.ts "Your bleet here"
 
 import readline from 'readline'
-import bsky from '@atproto/api';
-const { BskyAgent } = bsky;
-import * as dotenv from 'dotenv';
-import process from 'node:process';
-dotenv.config();
+import agent from './agent.js';
 
 export const bleet = async (agent, bleet: string) => {
   await agent.post({
     text: bleet,
   });
 }
-
-const agent = new BskyAgent({
-  service: 'https://bsky.social',
-});
-
-await agent.login({
-  identifier: process.env.BSKY_USERNAME!,
-  password: process.env.BSKY_PASSWORD!,
-});
 
 const rl = readline.createInterface({
   input: process.stdin,
