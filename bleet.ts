@@ -15,18 +15,32 @@ const rl = readline.createInterface({
   output: process.stdout
 })
 
+export const bleetInterface = async (agent) => {
+  rl.question("Type your post content below:\n", (textContent) => {
+    bleetWithConfirmation(textContent, agent);
+  })
+}
+
+function bleetWithConfirmation(textContent: string, agent: any) {
+  console.log(`\nPosting the following content:\n----------\n${textContent}\n----------`);
+  rl.question(`Are you sure you want to post? (Type SEND to confirm) `, (answer) => {
+    if (answer === "SEND") {
+      console.log("Posting...");
+      bleet(agent, textContent);
+      console.log("Hopefully posted!");
+      rl.close();
+    } else {
+      console.log("Cancelled.");
+      rl.close();
+      process.exit(1);
+    }
+  });
+}
+
 const textContent = process.argv[2];
 
-console.log(`\nPosting the following content:\n----------\n${textContent}\n----------`)
-rl.question(`Are you sure you want to post? (Type SEND to confirm) `, (answer) => {
-  if (answer === "SEND") {
-    console.log("Posting...")
-    bleet(agent, textContent)
-    console.log("Hopefully posted!")
-    rl.close()
-  } else {
-    console.log("Cancelled.")
-    rl.close()
-    process.exit(1)
-  }
-})
+if (textContent) {
+  bleetWithConfirmation(textContent, agent);
+} else {
+  bleetInterface(agent);
+}

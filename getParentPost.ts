@@ -1,6 +1,6 @@
 import agent from "./agent.js";
 
-export const getParentPost = async (parentURL: string) => {
+export const getParentPost = async (agent, parentURL: string) => {
 
   const parentDomain = parentURL.split("/")[4];
   const parentPostID = parentURL.split("/")[6];
@@ -17,11 +17,14 @@ export const getParentPost = async (parentURL: string) => {
 
 const parentURL = process.argv[2];
 
-const ppost = await getParentPost(parentURL);
+if (parentURL){
+  const ppost = await getParentPost(agent, parentURL);
 
-if (!ppost) {
-  console.error("ERROR: Could not find parent post.")
-  process.exit(1)
+  if (!ppost) {
+    console.error("ERROR: Could not find parent post.")
+    process.exit(1)
+  }
+
+  console.log(ppost)
 }
 
-console.log(JSON.parse(JSON.stringify(ppost.post.record)).embed.images[0])
